@@ -1,5 +1,5 @@
 package ledgerFlow.controller;
-import ledgerFlow.dto.EmpresaDTO;
+import ledgerFlow.model.dto.request.EmpresaDTO;
 import ledgerFlow.service.EmpresaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,18 +14,18 @@ public class EmpresaController {
 
     private final EmpresaService empresaService;
 
-    EmpresaController(EmpresaService empresaService){
+    public EmpresaController(EmpresaService empresaService){
         this.empresaService = empresaService;
     }
 
-    @GetMapping({"/id/{id}"})
+    @GetMapping({"/{id}"})
     public ResponseEntity<EmpresaDTO> getById(@PathVariable Long id){
     return empresaService.getById(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping({"/name/{nome}"})
+    @GetMapping({"/{nome}"})
     public ResponseEntity<EmpresaDTO> getByNome(@PathVariable String nome){
         return empresaService.getByName(nome)
                 .map(ResponseEntity::ok)

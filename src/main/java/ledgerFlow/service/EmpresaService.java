@@ -1,6 +1,6 @@
 package ledgerFlow.service;
 
-import ledgerFlow.dto.EmpresaDTO;
+import ledgerFlow.model.dto.request.EmpresaDTO;
 import ledgerFlow.mapper.EmpresaMapper;
 import ledgerFlow.repository.EmpresaRepository;
 import org.springframework.stereotype.Service;

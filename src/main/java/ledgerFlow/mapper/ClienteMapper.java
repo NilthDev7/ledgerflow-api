@@ -1,13 +1,15 @@
 package ledgerFlow.mapper;
 
-import ledgerFlow.dto.ClienteCriacaoDTO;
-import ledgerFlow.dto.ClienteRetornoDTO;
-import ledgerFlow.entity.Cliente;
+import ledgerFlow.model.dto.request.ClienteCriacaoDTO;
+import ledgerFlow.model.dto.response.ClienteRetornoDTO;
+import ledgerFlow.model.entity.Cliente;
 
 
 public class ClienteMapper {
 
     public static ClienteRetornoDTO convertToDto(Cliente cliente) {
+        if(cliente == null) return null;
+
         ClienteRetornoDTO use = new ClienteRetornoDTO();
         use.setId(cliente.getId());
         use.setNome(cliente.getNome());

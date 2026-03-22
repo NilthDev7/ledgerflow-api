@@ -1,8 +1,8 @@
 package ledgerFlow.controller;
-import ledgerFlow.dto.ClienteCriacaoDTO;
-import ledgerFlow.dto.ClienteRetornoDTO;
+import ledgerFlow.model.dto.request.ClienteCriacaoDTO;
+import ledgerFlow.model.dto.response.ClienteRetornoDTO;
 import ledgerFlow.service.ClienteService;
-import ledgerFlow.entity.Cliente;
+import ledgerFlow.model.entity.Cliente;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,28 +14,29 @@ public class ClienteController {
 
     private final ClienteService clienteService;
 
-    ClienteController(ClienteService clienteService){
+    public ClienteController(ClienteService clienteService){
         this.clienteService = clienteService;
     }
 
-    @GetMapping({"/id/{id}"})
+    @GetMapping({"/{id}"})
     public ResponseEntity<Cliente> findClienteById(@PathVariable Long id){
         return clienteService.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping({"/showAll"})
-    public List<Cliente> getAllClientes(){
-        return clienteService.showAll();
+    @GetMapping({"/clientes"})
+    public ResponseEntity<List<Cliente>> getAllClientes(){
+        List<Cliente> clientes = clienteService.showAll();
+        return ResponseEntity.ok(clientes);
     }
 
-    @GetMapping({"/name/{name}"})
+    @GetMapping({"/{name}"})
     public ResponseEntity<Cliente> findByName(@PathVariable String name){
         return clienteService.findByNome(name)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/cadClient")
+    @PostMapping("/cliente")
     public ResponseEntity<ClienteRetornoDTO> save(@RequestBody ClienteCriacaoDTO client){
         ClienteRetornoDTO clienteDto = clienteService.create(client);
         return ResponseEntity.ok(clienteDto);

@@ -1,31 +1,33 @@
 package ledgerFlow.controller;
-import ledgerFlow.dto.UsuarioCriacaoDTO;
-import ledgerFlow.dto.UsuarioRetornoDTO;
+import ledgerFlow.model.dto.request.UsuarioCriacaoDTO;
+import ledgerFlow.model.dto.response.UsuarioRetornoDTO;
 import ledgerFlow.service.UsuarioService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/usuario")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    public UsuarioController(UsuarioService usuarioService){
+    public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
 
     @GetMapping({"/id/{id}"})
-    public ResponseEntity<UsuarioRetornoDTO> getUserById(@PathVariable Long id){
+    public ResponseEntity<UsuarioRetornoDTO> getUserById(@PathVariable Long id) {
         return usuarioService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<UsuarioRetornoDTO>> allUsers(){
+    @GetMapping("/usuarios")
+    public ResponseEntity<List<UsuarioRetornoDTO>> allUsers() {
         List<UsuarioRetornoDTO> users = usuarioService.findAll();
         return ResponseEntity.ok(users);
     }
@@ -37,10 +39,10 @@ public class UsuarioController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/cadUser")
-    public ResponseEntity<UsuarioRetornoDTO> createNewUser(@RequestBody UsuarioCriacaoDTO dto){
+    @PostMapping("/usuarios")
+    public ResponseEntity<UsuarioRetornoDTO> createNewUser(@RequestBody UsuarioCriacaoDTO dto) {
         UsuarioRetornoDTO usuarioRetornoDTO = usuarioService.create(dto);
-        return ResponseEntity.ok(usuarioRetornoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioRetornoDTO);
     }
 }
 

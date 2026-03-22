@@ -1,12 +1,10 @@
 package ledgerFlow.controller;
 
-import ledgerFlow.dto.DepositoDTO;
-import ledgerFlow.dto.TransactionDTO;
+import ledgerFlow.model.dto.request.DepositoDTO;
+import ledgerFlow.model.dto.request.TransactionDTO;
 import ledgerFlow.service.TransactionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/transactions")

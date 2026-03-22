@@ -1,9 +1,9 @@
 package ledgerFlow.service;
-import ledgerFlow.dto.ClienteCriacaoDTO;
-import ledgerFlow.dto.ClienteRetornoDTO;
+import ledgerFlow.model.dto.request.ClienteCriacaoDTO;
+import ledgerFlow.model.dto.response.ClienteRetornoDTO;
 import ledgerFlow.mapper.ClienteMapper;
 import ledgerFlow.repository.ClienteRepository;
-import ledgerFlow.entity.Cliente;
+import ledgerFlow.model.entity.Cliente;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;

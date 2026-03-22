@@ -1,9 +1,13 @@
 package ledgerFlow.service;
-import ledgerFlow.dto.UsuarioCriacaoDTO;
-import ledgerFlow.dto.UsuarioRetornoDTO;
+import ledgerFlow.model.dto.request.UsuarioCriacaoDTO;
+import ledgerFlow.model.dto.response.UsuarioRetornoDTO;
 import ledgerFlow.mapper.UsuarioMapper;
 import ledgerFlow.repository.UsuarioRepository;
-import ledgerFlow.entity.Usuario;
+import ledgerFlow.model.entity.Usuario;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -11,12 +15,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements UserDetailsService {
 
     private final UsuarioRepository usuarioRepository;
 
-    public UsuarioService(UsuarioRepository usuarioRepository){
+    private final PasswordEncoder passwordEncoder;
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder){
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Optional<UsuarioRetornoDTO> findByNome(String nome){
@@ -36,6 +42,7 @@ public class UsuarioService {
     }
 
     public UsuarioRetornoDTO create(UsuarioCriacaoDTO user){
+        String senhaCriptografada = passwordEncoder.encode(user.getSenha());
         Usuario usuario = UsuarioMapper.toEntity(user);
 
         Usuario saved = usuarioRepository.save(usuario);
@@ -50,5 +57,10 @@ public class UsuarioService {
         if(emitente.getSaldo().compareTo(valor) < 0){
             throw new Exception("Saldo insuficiente!");
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return usuarioRepository.findByLogin(username);
     }
 }

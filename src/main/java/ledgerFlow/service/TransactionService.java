@@ -1,11 +1,11 @@
 package ledgerFlow.service;
 
-import ledgerFlow.dto.DepositoDTO;
-import ledgerFlow.dto.TransactionDTO;
-import ledgerFlow.entity.Transaction;
-import ledgerFlow.entity.Usuario;
-import ledgerFlow.enums.StatusTransacao;
-import ledgerFlow.enums.TipoTransacao;
+import ledgerFlow.model.dto.request.DepositoDTO;
+import ledgerFlow.model.dto.request.TransactionDTO;
+import ledgerFlow.model.entity.Transaction;
+import ledgerFlow.model.entity.Usuario;
+import ledgerFlow.model.enums.StatusTransacao;
+import ledgerFlow.model.enums.TipoTransacao;
 import ledgerFlow.repository.TransactionRepository;
 import jakarta.transaction.Transactional;
 import ledgerFlow.repository.UsuarioRepository;

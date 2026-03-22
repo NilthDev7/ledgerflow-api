@@ -1,6 +1,6 @@
 package ledgerFlow.repository;
 
-import ledgerFlow.entity.Cliente;
+import ledgerFlow.model.entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

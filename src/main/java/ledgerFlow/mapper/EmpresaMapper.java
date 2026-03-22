@@ -1,7 +1,7 @@
 package ledgerFlow.mapper;
 
-import ledgerFlow.dto.EmpresaDTO;
-import ledgerFlow.entity.Empresa;
+import ledgerFlow.model.dto.request.EmpresaDTO;
+import ledgerFlow.model.entity.Empresa;
 
 public class EmpresaMapper {
     public static EmpresaDTO convertToDto(Empresa empresa){

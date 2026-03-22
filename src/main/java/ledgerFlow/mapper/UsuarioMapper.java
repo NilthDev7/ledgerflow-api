@@ -1,8 +1,8 @@
 package ledgerFlow.mapper;
 
-import ledgerFlow.dto.UsuarioCriacaoDTO;
-import ledgerFlow.dto.UsuarioRetornoDTO;
-import ledgerFlow.entity.Usuario;
+import ledgerFlow.model.dto.request.UsuarioCriacaoDTO;
+import ledgerFlow.model.dto.response.UsuarioRetornoDTO;
+import ledgerFlow.model.entity.Usuario;
 
 public class UsuarioMapper {
 

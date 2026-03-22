@@ -1,14 +1,14 @@
 package ledgerFlow.repository;
 
-import ledgerFlow.model.entity.Empresa;
+import ledgerFlow.model.entity.Instituicao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
+public interface InstituicaoRepository extends JpaRepository<Instituicao, Long> {
 
-    Optional<Empresa> findByNome(String nome);
+    Optional<Instituicao> instituicaoNome(String nom);
 
 }
